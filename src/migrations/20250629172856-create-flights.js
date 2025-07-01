@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      airplanId: {
+      airplaneId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },

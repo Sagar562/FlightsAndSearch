@@ -1,6 +1,6 @@
 const { Flights } = require('../models/index');
 
-class FilghtRepository {
+class FlightRepository {
     
     async createFlight(data) {
         try {
@@ -14,4 +14,4 @@ class FilghtRepository {
 
 }
 
-module.exports = FilghtRepository;
+module.exports = FlightRepository;
