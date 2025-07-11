@@ -15,6 +15,8 @@ router.patch('/city/:id', CityController.update);
 router.post('/airplanes', AirplaneController.create);
 router.get('./airplanes/:airplaneId', AirplaneController.get);
 router.get('./airplanes', AirplaneController.getAll);
+router.delete('./airplanes/:airplaneId', AirplaneController.destroy);
+router.patch('./airplanes/:airplaneId', AirplaneController.update);
 
 // flight routes
 router.post('/flights', flightMiddlewares.validateCreateFlight, FlightController.create);

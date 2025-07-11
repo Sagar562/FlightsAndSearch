@@ -45,7 +45,7 @@ const create = async (req, res) => {
 
 const getAll = async (req, res) => {
     try {
-        const airplanes = await airplaneService.getAllAirplan();
+        const airplanes = await airplaneService.getAllAirplane();
         return res.status(SuccessCodes.OK).json({
             data: airplanes,
             success: true,
@@ -62,8 +62,47 @@ const getAll = async (req, res) => {
     }
 }
 
+const destroy = async (req, res) => {
+    try {
+        const response = await airplaneService.deleteAirplane(req.params.airplaneId);
+        return res.status(SuccessCodes.OK).json({
+            data: response,
+            success: true,
+            message: 'Airplane deleted successfully',
+            error: {}
+        });
+    } catch (error) {
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
+            data: {},
+            success: false,
+            message: 'Error while deleting airplane',
+            error: error
+        });
+    }
+}
+
+const update = async (req, res) => {
+    try {
+        const response = await airplaneService.updateAirplane(req.params.airplaneId);
+        return res.status(SuccessCodes.OK).json({
+            data: response,
+            success: true,
+            message: 'Airplane details updated successfully',
+            error: {}
+        });
+    } catch (error) {
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
+            data: {},
+            success: false,
+            message: 'Error while updating airplane',
+            error: error
+        });
+    }
+}
 module.exports = {
     get,
     create,
-    getAll
+    getAll,
+    destroy,
+    update
 }
