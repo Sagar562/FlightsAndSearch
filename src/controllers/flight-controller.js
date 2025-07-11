@@ -1,5 +1,5 @@
 const { FlightService } = require('../services/index');
-const { SuccessCodes } = require('../utils/error-codes');
+const { SuccessCodes, ServerErrorCodes } = require('../utils/error-codes');
 
 const flightService = new FlightService();
 
@@ -33,6 +33,26 @@ const create = async (req, res) => {
     }
 }
 
+const get = async (req, res) => {
+    try {
+        const flight = await flightService.getFlight(req.params.flightId);
+        return res.status(SuccessCodes.OK).json({
+            data: flight,
+            success: true,
+            message: 'Flight Details fetched successfully',
+            error: {}
+        });
+    } catch (error) {
+        console.log("Something went wrong in flight controller");
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
+            data: {},
+            success: false,
+            message: 'Not able to get flight details',
+            error: error
+        })
+    }
+}
+
 const getAll = async (req, res) => {
     try {
         const flights = await flightService.getAllFlightData(req.query);
@@ -53,8 +73,51 @@ const getAll = async (req, res) => {
     }
 }
 
+const update = async (req, res) => {
+    try {
+        const response = await flightService.updateFlight(req.params.flightId, req.body);
+        return res.status(SuccessCodes.OK).json({
+            data: response,
+            success: true,
+            message: 'Flights details updated successffully',
+            error: {}
+        });
+    } catch (error) {
+        console.log("Something went wrong in flight controller while updating flight details");
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
+            data: {},
+            success: false,
+            message: 'Not able to delete flights details',
+            error: error
+        })
+    }
+}
+
+const destroy = async (req, res) => {
+    try {
+        const response = await flightService.deleteFlight(req.params.flightId);
+        return res.status(SuccessCodes.OK).json({
+            data: response,
+            success: true,
+            message: 'Flight details deleted successfully',
+            error: {}
+        });
+    } catch (error) {
+        console.log("Something went wrong in flight controller while deleting flight details");
+        return res.status(ServerErrorCodes.INTERNAL_SERVER_ERROR).json({
+            data: {},
+            success: false,
+            message: 'Not able to delete flights details',
+            error: error
+        })
+    }
+}
+
 
 module.exports = {
     create,
-    getAll
+    get,
+    getAll,
+    update,
+    destroy
 }

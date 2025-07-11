@@ -13,13 +13,16 @@ router.patch('/city/:id', CityController.update);
 
 // airplane routes
 router.post('/airplanes', AirplaneController.create);
-router.get('./airplanes/:airplaneId', AirplaneController.get);
-router.get('./airplanes', AirplaneController.getAll);
-router.delete('./airplanes/:airplaneId', AirplaneController.destroy);
-router.patch('./airplanes/:airplaneId', AirplaneController.update);
+router.get('/airplanes/:airplaneId', AirplaneController.get);
+router.get('/airplanes', AirplaneController.getAll);
+router.delete('/airplanes/:airplaneId', AirplaneController.destroy);
+router.patch('/airplanes/:airplaneId', AirplaneController.update);
 
 // flight routes
 router.post('/flights', flightMiddlewares.validateCreateFlight, FlightController.create);
+router.get('/flights/:flightId', FlightController.get);
 router.get('/flights', FlightController.getAll);
+router.patch('/flights/:flightId', FlightController.update);
+router.delete('/flights/:flightId', FlightController.destroy);
 
 module.exports = router;

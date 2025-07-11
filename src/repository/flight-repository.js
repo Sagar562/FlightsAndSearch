@@ -63,6 +63,29 @@ class FlightRepository {
         }
     }
 
+    async updateFlight(flightId, data) {
+        try {
+            const response = await Flights.update(data, {
+                where: {id: flightId}
+            });
+            return response;
+        } catch (error) {
+            console.log("Something went wrong while updating in flight repository");
+            throw {error};
+        }
+    }
+
+    async deleteFlight(flightId) {
+        try {
+            const response = await Flights.destroy({
+                where: { id: flightId }
+            });
+            return response;
+        } catch (error) {
+            console.log("Something went wrong while deleting in flight repository");
+            throw {error};
+        }
+    }
 }
 
 module.exports = FlightRepository;
