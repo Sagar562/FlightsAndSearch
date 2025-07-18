@@ -47,7 +47,7 @@ class FlightService {
 
     async updateFlight(flightId, data) {
         try {
-            const response = await this.airplaneRepository.updateAirplane(flightId, data);
+            const response = await this.flightRepository.updateFlight(flightId, data);
             return response;
         } catch (error) {
             console.log("Something went wrong in updating flighs");
@@ -57,7 +57,7 @@ class FlightService {
 
     async deleteFlight(flightId) {
         try {
-            const response = await this.airplaneRepository.deleteAirplane(flightId);
+            const response = await this.flightRepository.deleteFlight(flightId);
             return response;
         } catch (error) {
             console.log("Something went wrong in deleting flighs");
